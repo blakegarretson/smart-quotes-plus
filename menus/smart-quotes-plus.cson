@@ -1,0 +1,16 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Enable smart-quotes-plus': 'smart-quotes-plus:smartreplace'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'smart-quotes-plus'
+      'submenu': [
+        { 'label': 'Run Smart Replace', 'command': 'smart-quotes-plus:smartreplace' }
+      ]
+    ]
+  }
+]
