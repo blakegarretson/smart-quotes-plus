@@ -1,14 +1,15 @@
 {
   "name": "smart-quotes-plus",
   "main": "./lib/smart-quotes-plus",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Replace straight quotes with smart unicode curly quotes, as well as other handy replacements.",
-  "activationEvents": ["smart-quotes-plus:smartreplace"],
+  "activationEvents": [
+    "smart-quotes-plus:smartreplace"
+  ],
   "repository": "https://github.com/blakegarretson/smart-quotes-plus",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"
   },
-  "dependencies": {
-  }
+  "dependencies": {}
 }
