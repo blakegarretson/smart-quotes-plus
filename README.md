@@ -4,14 +4,14 @@ This package replaces straight quotes with smart unicode curly quotes, as well a
 
 The goal here is **NOT** to create yet another markup language.  This is just a convenience function that lets you write the way most people type, that is, using the straight quotes on your keyboard without any special markup to signify opening or closing quotes.  You can use this in conjunction with a lightweight markup language like Asciidoc, or even a full markup language like LaTeX. The problem with most markup is that you still need to use fancy notation to produce correct curly quotes.  Smart Quotes Plus lets you type with easy-to-use, normal straight quotes (`"` and `'`), and then convert it before running it through Asciidoc, Markdown, etc.  It’s all about minimizing the focus on markup during typing, and focusing on the writing itself, which is the spirit of most markup languages anyway.
 
-#### Quote replacement in default mode:
+#### Quote replacement:
 
 Input Markup|Character Name|Output Unicode Char|Notes
 :-------:|:-------:|:-------:|-------
 `"`|double quote|`“` or `”`|figures out which to use based on context
 `'`|single quote|`‘` or `’`|figures out which to use based on context
  
-#### Other replacements in any mode:
+#### Other replacements:
 
 Input Markup|Character Name|Output Unicode Char|Notes
 :-------:|:-------:|:-------:|-------
