@@ -11,15 +11,19 @@ module.exports =
     text = editor.getText()
 
     open_double_single = "“‘"
+    open_single_double = "‘“"
     open_double = "“"
     open_single = "‘"
     close_single_double = "’”"
+    close_double_single = "”’"
     close_double = "”"
     close_single = "’"
 
     #quotes
     text = text.replace /"'(?=\w)/g, ($0) -> open_double_single
     text = text.replace /([\w\.\!\?\%])'"/g, ($0, $1) -> $1+close_single_double
+    text = text.replace /'"(?=\w)/g, ($0) -> open_single_double
+    text = text.replace /([\w\.\!\?\%])"'/g, ($0, $1) -> $1+close_double_single
     text = text.replace /"(?=\w)/g, ($0) -> open_double
     text = text.replace /([\w.!?%])"/g, ($0, $1) -> $1+close_double
     text = text.replace /([\w.!?%])'/g, ($0, $1) -> $1+close_single
