@@ -2,13 +2,22 @@
 #   "'test' test 'test'" and "test" and 'test' 'tis 'twas '90 '90s '90a ... (C) (R) (TM) 1--2 a--b c---d ---
 # Yields:
 #   “‘test’ test ‘test’” and “test” and ‘test’ ’tis ’twas ’90 ’90s ‘90a … © ® ™ 1–2 a--b c—d ---
-module.exports =
-  activate: ->
-    atom.workspaceView.command "smart-quotes-plus:smartreplace", => @smartreplace()
 
-  smartreplace: ->
-    editor = atom.workspace.activePaneItem
-    text = editor.getText()
+module.exports =
+    activate: ->
+        atom.commands.add 'atom-text-editor', 'smart-quotes-plus:smartreplace', -> 
+            editor = atom.workspace.getActiveTextEditor()
+            smartreplace(editor)
+    
+smartreplace = (editor) ->
+    if editor.getSelectedText()
+        text = editor.getSelectedText()
+        editor.insertText(doreplacement(text))
+    else
+        text = editor.getText()
+        editor.setText(doreplacement(text))
+    
+doreplacement = (text) ->
 
     open_double_single = "“‘"
     open_single_double = "‘“"
@@ -29,7 +38,7 @@ module.exports =
     text = text.replace /([\w.!?%])'/g, ($0, $1) -> $1+close_single
     text = text.replace /([\s])'(?=(tis\b|twas\b))/g, ($0, $1) -> $1+close_single
     text = text.replace /(\s)'(?=[0-9]+s*\b)/g, ($0, $1) -> $1+close_single
-    text = text.replace /([^\w])'(?=\w)/g, ($0, $1, $2) -> $1+open_single
+    text = text.replace /([^\w]|^)'(?=\w)/g, ($0, $1, $2) -> $1+open_single
 
     # misc chars
     text = text.replace /\.\.\./g, "…"
@@ -39,5 +48,4 @@ module.exports =
     text = text.replace /([\w])---(?=[a-z])/g, ($0, $1) -> $1+"—"
     text = text.replace /([0-9])--(?=[0-9])/g, ($0, $1) -> $1+"–"
 
-    editor.setText(text)
-    #editor.insertText("TEST")
+    return text

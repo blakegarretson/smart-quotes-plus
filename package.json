@@ -3,9 +3,9 @@
   "main": "./lib/smart-quotes-plus",
   "version": "1.2.0",
   "description": "Replace straight quotes with smart unicode curly quotes, as well as other handy replacements.",
-  "activationEvents": [
-    "smart-quotes-plus:smartreplace"
-  ],
+  "activationCommands": {
+      "atom-text-editor": ["smart-quotes-plus:smartreplace"]
+  },
   "repository": "https://github.com/blakegarretson/smart-quotes-plus",
   "license": "MIT",
   "engines": {
