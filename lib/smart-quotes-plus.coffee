@@ -5,10 +5,10 @@
 
 module.exports =
     activate: ->
-        atom.commands.add 'atom-text-editor', 'smart-quotes-plus:smartreplace', -> 
+        atom.commands.add 'atom-text-editor', 'smart-quotes-plus:smartreplace', ->
             editor = atom.workspace.getActiveTextEditor()
             smartreplace(editor)
-    
+
 smartreplace = (editor) ->
     if editor.getSelectedText()
         text = editor.getSelectedText()
@@ -16,7 +16,7 @@ smartreplace = (editor) ->
     else
         text = editor.getText()
         editor.setText(doreplacement(text))
-    
+
 doreplacement = (text) ->
 
     open_double_single = "“‘"
@@ -28,14 +28,16 @@ doreplacement = (text) ->
     close_double = "”"
     close_single = "’"
 
-    #quotes
+    # quotes
     text = text.replace /"'(?=\w)/g, ($0) -> open_double_single
-    text = text.replace /([\w\.\!\?\%])'"/g, ($0, $1) -> $1+close_single_double
+    text = text.replace /([\w\.\!\?\%,])'"/g, ($0, $1) -> $1+close_single_double
     text = text.replace /'"(?=\w)/g, ($0) -> open_single_double
-    text = text.replace /([\w\.\!\?\%])"'/g, ($0, $1) -> $1+close_double_single
+    text = text.replace /([\w\.\!\?\%,])"'/g, ($0, $1) -> $1+close_double_single
     text = text.replace /"(?=\w)/g, ($0) -> open_double
-    text = text.replace /([\w.!?%])"/g, ($0, $1) -> $1+close_double
-    text = text.replace /([\w.!?%])'/g, ($0, $1) -> $1+close_single
+    text = text.replace /([\w.!?%,])"/g, ($0, $1) -> $1+close_double
+    text = text.replace /([\w.!?%,])'/g, ($0, $1) -> $1+close_single
+
+    # single tick use cases
     text = text.replace /([\s])'(?=(tis\b|twas\b))/g, ($0, $1) -> $1+close_single
     text = text.replace /(\s)'(?=[0-9]+s*\b)/g, ($0, $1) -> $1+close_single
     text = text.replace /([^\w]|^)'(?=\w)/g, ($0, $1, $2) -> $1+open_single
