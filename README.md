@@ -1,4 +1,8 @@
-# smart-quotes-plus package
+# smart-quotes-html fork 
+
+This fork replaces straight double and single quotes with HTML `&` codes instead of with unicode characters. Otherwise, functionally the same as smart-quotes-plus by blakegarretson. Thanks Blake!
+
+# smart-quotes-plus readme
 
 This package replaces straight quotes with smart unicode curly quotes, as well as a few other handy replacements.  Straight quotes like " and ' are converted to curly quotes (including apostrophes in contractions) to turn `"this"` and `'this'` into `“this”` and `‘this’`.  The default key-binding is `CTRL-ALT-'`.  You clearly would only want to run this on prose.  If it screws something up, just hit `CTRL-Z` to undo the replacement.
 
