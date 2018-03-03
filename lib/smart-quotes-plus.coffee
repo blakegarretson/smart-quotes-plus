@@ -13,20 +13,20 @@ module.exports =
             dumbreplace(editor)
 
 smartreplace = (editor) ->
-    if editor.getSelectedText()
-        text = editor.getSelectedText()
-        editor.insertText(doreplacement(text))
-    else
-        text = editor.getText()
-        editor.setText(doreplacement(text))
+    point = editor.getCursorBufferPosition()
+    if editor.getSelectedText().length == 0
+        editor.selectAll()
+    text = editor.getSelectedText()
+    editor.insertText(doreplacement(text))
+    editor.setCursorBufferPosition(point)
 
 dumbreplace = (editor) ->
-    if editor.getSelectedText()
-        text = editor.getSelectedText()
-        editor.insertText(dodumbreplacement(text))
-    else
-        text = editor.getText()
-        editor.setText(dodumbreplacement(text))
+    point = editor.getCursorBufferPosition()
+    if editor.getSelectedText().length == 0
+        editor.selectAll()
+    text = editor.getSelectedText()
+    editor.insertText(dodumbreplacement(text))
+    editor.setCursorBufferPosition(point)
 
 doreplacement = (text) ->
 
