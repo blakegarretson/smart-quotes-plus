@@ -8,6 +8,9 @@ module.exports =
         atom.commands.add 'atom-text-editor', 'smart-quotes-plus:smartreplace', ->
             editor = atom.workspace.getActiveTextEditor()
             smartreplace(editor)
+        atom.commands.add 'atom-text-editor', 'smart-quotes-plus:dumbreplace', ->
+            editor = atom.workspace.getActiveTextEditor()
+            dumbreplace(editor)
 
 smartreplace = (editor) ->
     if editor.getSelectedText()
@@ -16,6 +19,14 @@ smartreplace = (editor) ->
     else
         text = editor.getText()
         editor.setText(doreplacement(text))
+
+dumbreplace = (editor) ->
+    if editor.getSelectedText()
+        text = editor.getSelectedText()
+        editor.insertText(dodumbreplacement(text))
+    else
+        text = editor.getText()
+        editor.setText(dodumbreplacement(text))
 
 doreplacement = (text) ->
 
@@ -49,5 +60,22 @@ doreplacement = (text) ->
     text = text.replace /\(TM\)/g, "™"
     text = text.replace /([\w])---(?=[a-z])/g, ($0, $1) -> $1+"—"
     text = text.replace /([0-9])--(?=[0-9])/g, ($0, $1) -> $1+"–"
+
+    return text
+
+dodumbreplacement = (text) ->
+
+    # quotes
+    text = text.replace /“|”/g, "\""
+    text = text.replace /‘|’/g, "'"
+
+    # misc chars
+    text = text.replace /…/g, "..."
+    text = text.replace /©/g, "(C)"
+    text = text.replace /®/g, "(R)"
+    text = text.replace /™/g, "(TM)"
+    text = text.replace /—/g, "---"
+    text = text.replace /–/g, "--"
+    text = text.replace /•/g, "-"
 
     return text
